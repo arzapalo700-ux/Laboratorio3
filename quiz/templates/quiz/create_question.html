@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Question</title>
+</head>
+<body>
+    <h1>Add Question to {{ exam.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <h3>Choices</h3>
+        {{ formset.management_form }}
+        {{ formset.non_form_errors }}
+        {% for choice_form in formset %}
+            <div style="margin-bottom: 10px;">
+                {{ choice_form.as_p }}
+            </div>
+        {% endfor %}
+        <button type="submit">Save Question</button>
+    </form>
+    <a href="{% url 'exam_detail' exam.pk %}">Cancel</a>
+</body>
+</html>

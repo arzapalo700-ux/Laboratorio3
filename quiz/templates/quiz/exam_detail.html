@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ exam.title }}</title>
+</head>
+<body>
+    <h1>{{ exam.title }}</h1>
+    <p>{{ exam.description }}</p>
+    <a href="{% url 'create_question' exam.pk %}">Add Question</a>
+    <hr>
+    <h2>Questions</h2>
+    <ul>
+        {% for question in exam.questions.all %}
+            <li>
+                <strong>{{ question.text }}</strong> (Score: {{ question.score }})
+                <ul>
+                    {% for choice in question.choices.all %}
+                        <li>{{ choice.text }} {% if choice.is_correct %}<strong>(Correct)</strong>{% endif %}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% empty %}
+            <li>No questions added yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'exam_list' %}">Back to list</a>
+</body>
+</html>

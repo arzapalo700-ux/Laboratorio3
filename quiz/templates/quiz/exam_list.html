@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exams</title>
+</head>
+<body>
+    <h1>Exams List</h1>
+    <ul>
+        {% for exam in exams %}
+            <li><a href="{% url 'exam_detail' exam.pk %}">{{ exam.title }}</a> - {{ exam.created_at }}</li>
+        {% empty %}
+            <li>No exams available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
